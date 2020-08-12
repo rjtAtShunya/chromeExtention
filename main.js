@@ -1,3 +1,4 @@
+fetch("data.json")
 
 const petsData = [
     {
