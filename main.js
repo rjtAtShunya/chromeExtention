@@ -1,27 +1,48 @@
-fetch("data.json")
+var petsData=[]; 
 
-const petsData = [
-    {
-      name: "Purrsloud",
-      species: "Cat",
-      favFoods: ["wet food", "dry food", "<strong>any</strong> food"],
-      birthYear: 2016,
-      photo: "https://learnwebcode.github.io/json-example/images/cat-2.jpg"
-    },
-    {
-      name: "Barksalot",
-      species: "Dog",
-      birthYear: 2008,
-      photo: "https://learnwebcode.github.io/json-example/images/dog-1.jpg"
-    },
-    {
-      name: "Meowsalot",
-      species: "Cat",
-      favFoods: ["tuna", "catnip", "celery"],
-      birthYear: 2012,
-      photo: "https://learnwebcode.github.io/json-example/images/cat-1.jpg"
-    }
-  ];
+fetch("./data.json").then(function(resp) {
+  //callback(resp.json());
+  
+  return resp.json();
+})
+.then(function(data) {
+  //pData.push(data);
+  petsData.push(data);
+  chrome.storage.local.set({'data': petsData}, function() {
+    // Notify that we saved.
+    console.log('Value is set to ' + petsData);
+
+  });
+  
+  // console.log("old arraty", petsData)
+});
+chrome.storage.local.get(['data'], function(result) {
+  console.log('Value currently is ' + JSON.parse(result));
+});
+//console.log(petsData)
+// var petsData = [{
+//   name: "Purrsloud",
+//   species: "Cat",
+//   favFoods: ["wet food", "dry food", "<strong>any</strong> food"],
+//   birthYear: 2016,
+//   photo: "https://learnwebcode.github.io/json-example/images/cat-2.jpg"
+// },
+// {
+//   name: "Barksalot",
+//   species: "Dog",
+//   birthYear: 2008,
+//   photo: "https://learnwebcode.github.io/json-example/images/dog-1.jpg"
+// },
+// {
+//   name: "Meowsalot",
+//   species: "Cat",
+//   favFoods: ["tuna", "catnip", "celery"],
+//   birthYear: 2012,
+//   photo: "https://learnwebcode.github.io/json-example/images/cat-1.jpg"
+// }];
+
+//    console.log(petsData)
+  
   
   function age(birthYear) {
     let calculatedAge = new Date().getFullYear() - birthYear;
