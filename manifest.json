@@ -11,8 +11,8 @@
   {
     "matches": ["<all_urls>"],
     "js": ["main.js"],
-    "run_at": "document_end",
-    "css":"style.css"
+    "run_at": "document_end"
+    
   }
 ],
   "background": {
